@@ -5,7 +5,6 @@ class Framework : public Singleton<Framework>
 	friend Singleton<Framework>;
 
 protected:
-
 	Framework() = default;
 	virtual ~Framework() = default;
 
@@ -31,6 +30,11 @@ public:
 
 	void SetTimeScale(float newTimeScale) { timeScale = newTimeScale; }
 	float GetTimeScale() const { return timeScale; }
+		
+	sf::RenderWindow& GetWindow() { return window; }
+	sf::Vector2u GetWindowSize() { return window.getSize(); }
+	sf::Vector2f GetWindowSizef() { return (sf::Vector2f)window.getSize(); }
+	sf::FloatRect GetWindowBounds() { return { {0.f,0.f}, GetWindowSizef() }; }
 
 	virtual void Init(int width, int height, const std::string& name);
 	virtual void Do();

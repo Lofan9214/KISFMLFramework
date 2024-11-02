@@ -6,53 +6,53 @@ TextGo::TextGo(const std::string& fontId, const std::string& name)
 {
 }
 
-void TextGo::setOrigin(Origins preset)
+void TextGo::SetOrigin(Origins preset)
 {
-	originpreset = preset;
-	origin = Utilities::SetOrigin(text, preset);
+	originPreset = preset;
+	origin = Utils::SetOrigin(text, preset);
 }
 
-void TextGo::setOrigin(const sf::Vector2f& neworigin)
+void TextGo::SetOrigin(const sf::Vector2f& neworigin)
 {
-	originpreset = Origins::Custom;
+	originPreset = Origins::Custom;
 	origin = neworigin;
 	text.setOrigin(neworigin);
 }
 
-void TextGo::setString(const std::string& newtext)
+void TextGo::SetTextString(const std::string& newtext)
 {
 	text.setString(newtext);
-	setOrigin(originpreset);
+	SetOrigin(originPreset);
 }
 
-void TextGo::setCharSize(unsigned int iSize)
+void TextGo::SetCharSize(unsigned int iSize)
 {
 	text.setCharacterSize(iSize);
 }
 
-void TextGo::setTextColor(sf::Color color)
+void TextGo::SetFillColor(sf::Color color)
 {
 	text.setFillColor(color);
 }
 
-void TextGo::setPosition(const sf::Vector2f& pos)
+void TextGo::SetPosition(const sf::Vector2f& pos)
 {
-	GameObject::setPosition(pos);
+	GameObject::SetPosition(pos);
 	text.setPosition(pos);
 }
 
-void TextGo::reset()
+void TextGo::Reset()
 {
 	auto& fontResMgr = ResourceMgr<sf::Font>::Instance();
 	text.setFont(fontResMgr.Get(fontId));
-	if (originpreset != Origins::Custom)
+	if (originPreset != Origins::Custom)
 	{
-		setOrigin(originpreset);
+		SetOrigin(originPreset);
 	}
 }
 
-void TextGo::draw(sf::RenderWindow& window)
+void TextGo::Draw(sf::RenderWindow& window)
 {
-	GameObject::draw(window);
+	GameObject::Draw(window);
 	window.draw(text);
 }

@@ -8,52 +8,52 @@ SceneDev2::SceneDev2()
 {
 }
 
-void SceneDev2::init()
+void SceneDev2::Init()
 {
 	std::cout << "SceneDev2::init()" << std::endl;
 
-	GameObject* obj = addGo(new SpriteGo("graphics/player.png", "player"));
-	GameObject* obj2 = addGo(new TextGo("fonts/KOMIKAP_.ttf", "SceneDev2"));
+	GameObject* obj = AddGo(new SpriteGo("graphics/player.png", "player"));
+	GameObject* obj2 = AddGo(new TextGo("fonts/KOMIKAP_.ttf", "SceneDev2"));
 
-	obj2->setOrigin(Origins::TL);
-	obj2->setPosition({ 100.f, 50.f });
+	obj2->SetOrigin(Origins::TL);
+	obj2->SetPosition({ 100.f, 50.f });
 	auto cst = dynamic_cast<TextGo*> (obj2);
 	if (cst != nullptr)
-		(dynamic_cast<TextGo*> (obj2))->setString("Scenesdkjlsfdkjl");
-	Scene::init();
+		(dynamic_cast<TextGo*> (obj2))->SetTextString("Scenesdkjlsfdkjl");
+	Scene::Init();
 }
 
-void SceneDev2::enter()
+void SceneDev2::Enter()
 {
 	std::cout << "SceneDev2::enter()" << std::endl;
 
 	TEXTURE_MGR.Load("graphics/player.png");
 	FONT_MGR.Load("fonts/KOMIKAP_.ttf");
 
-	Scene::enter();
+	Scene::Enter();
 }
 
-void SceneDev2::exit()
+void SceneDev2::Exit()
 {
 	std::cout << "SceneDev2::exit()" << std::endl;
 
-	Scene::exit();
+	Scene::Exit();
 	TEXTURE_MGR.Unload("graphics/player.png");
 	FONT_MGR.Unload("fonts/KOMIKAP_.ttf");
 
 }
 
-void SceneDev2::update(float dt)
+void SceneDev2::Update(float dt)
 {
-	Scene::update(dt);
+	Scene::Update(dt);
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
 	{
-		SCENE_MGR.changeScene(SceneIds::Dev1);
+		SCENE_MGR.ChangeScene(SceneIds::Dev1);
 	}
 }
 
-void SceneDev2::draw(sf::RenderWindow& window)
+void SceneDev2::Draw(sf::RenderWindow& window)
 {
-	Scene::draw(window);
+	Scene::Draw(window);
 }

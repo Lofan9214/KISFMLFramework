@@ -14,19 +14,19 @@ public:
 	TextGo() = default;
 	~TextGo() = default;
 
-	void reset() override;
-	void draw(sf::RenderWindow& window) override;
+	void Reset() override;
+	void Draw(sf::RenderWindow& window) override;
 
 	TextGo(const std::string& fontId, const std::string& name = "");
 
-	void setOrigin(Origins preset) override;
-	void setOrigin(const sf::Vector2f& neworigin) override;
+	void SetOrigin(Origins preset) override;
+	void SetOrigin(const sf::Vector2f& neworigin) override;
 
 
-	void setPosition(const sf::Vector2f& pos) override;
+	void SetPosition(const sf::Vector2f& pos) override;
 
-	void setString(const std::string& newtext);
-	void setCharSize(unsigned int iSize);
-	void setTextColor(sf::Color color);
+	void SetTextString(const std::string& newtext);
+	void SetCharSize(unsigned int iSize);
+	void SetFillColor(sf::Color color);
 };
 

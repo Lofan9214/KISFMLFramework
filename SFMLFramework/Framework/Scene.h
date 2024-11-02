@@ -8,6 +8,11 @@ protected:
 
 	std::list<GameObject*> addGameObjs;
 	std::list<GameObject*> removeGameObjs;
+	
+	std::list<std::list<GameObject*>> drawObjects;
+	std::list<sf::View*> drawView;
+
+	bool gameObjectsChanged = false;
 
 	Scene(const Scene&) = delete;
 	Scene& operator=(const Scene&) = delete;
@@ -16,39 +21,44 @@ public:
 	Scene(SceneIds id);
 	virtual ~Scene() = default;
 
-	virtual void init();
-	virtual void release();
+	virtual void Init();
+	virtual void Release();
 
-	virtual void enter();
-	virtual void exit();
+	virtual void Enter();
+	virtual void Exit();
 
-	virtual void update(float dt);
-	virtual void lateUpdate(float dt);
+	virtual void Update(float dt);
+	virtual void LateUpdate(float dt);
 
-	virtual void onPreDraw();
-	virtual void draw(sf::RenderWindow& window);
-	virtual void onPostDraw();
+	virtual void OnPreDraw();
+	virtual void Draw(sf::RenderWindow& window);
+	virtual void OnPostDraw();
 
 	template<typename T>
-	T* addGo(T* obj)
+	T* AddGo(T* obj)
 	{
+		gameObjectsChanged = true;
 		addGameObjs.push_back(obj);
 		return obj;
 	}
 
-	virtual void removeGo(GameObject* obj);
+	virtual void RemoveGo(GameObject* obj);
+
 	template<typename T>
-	void removeGo(std::list<T*> lstobj)
+	void RemoveGo(std::list<T*> lstobj)
 	{
+		gameObjectsChanged = true;
 		for (auto obj : lstobj)
 		{
 			removeGameObjs.push_back(obj);
 		}
 	}
-	virtual GameObject* findGo(const std::string& name);
+
+	virtual GameObject* FindGo(const std::string& name);
 	virtual int FindGoAll(const std::string& name, std::list<GameObject*>& list);
 
-	void applyAddGo();
-	void applyRemoveGo();
+	void ApplyAddGo();
+	void ApplyRemoveGo();
+	void SortDrawObject();
 };
 

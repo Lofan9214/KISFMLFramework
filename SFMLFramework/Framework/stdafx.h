@@ -13,7 +13,7 @@
 #include <SFML/Audio.hpp>
 
 #include "Defines.h"
-#include "Utilities.h"
+#include "Utils.h"
 #include "Singleton.h"
 #include "Framework.h"
 #include "InputMgr.h"

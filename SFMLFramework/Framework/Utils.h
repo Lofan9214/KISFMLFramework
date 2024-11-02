@@ -1,5 +1,5 @@
 #pragma once
-class Utilities
+class Utils
 {
 private:
 
@@ -18,13 +18,13 @@ public:
 #pragma endregion
 
 #pragma region ·£´ý
-	static void init();
+	static void Init();
 
-	static float randFloatRange(float min, float max);
-	static int randIntRange(int min, int max);
-	static float randPercent();
-	static sf::Vector2f randOnCircle();
-	static sf::Vector2f randInCircle();
+	static float RandomRange(float min, float max);
+	static int RandomRange(int min, int max);
+	static float RandomValue(); // 0.f ~ 1.f
+	static sf::Vector2f RandomOnUnitCircle();
+	static sf::Vector2f RandomInUnitCircle();
 
 #pragma endregion
 

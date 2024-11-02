@@ -19,13 +19,13 @@ protected:
 public:
 	SceneDev1();
 	~SceneDev1() = default;
-	void init() override;
-	void enter() override;
-	void exit() override;
+	void Init() override;
+	void Enter() override;
+	void Exit() override;
 
-	void update(float dt) override;
+	void Update(float dt) override;
 
-	void draw(sf::RenderWindow& window) override;
+	void Draw(sf::RenderWindow& window) override;
 
 	void setStatus(Status newStatus);
 	void updateAwake(float dt);

@@ -13,20 +13,21 @@ public:
 	SpriteGo(const std::string& texId, const std::string& name = "");
 	void setTextureId(const std::string& id) { textureId = id; }
 
-	void setPosition(const sf::Vector2f& pos) override;
+	void SetPosition(const sf::Vector2f& pos) override;
 
-	void setOrigin(Origins preset) override;
-	void setOrigin(const sf::Vector2f& neworigin) override;
+	void SetOrigin(Origins preset) override;
+	void SetOrigin(const sf::Vector2f& neworigin) override;
 
-	void setFlipX(bool flipX) override;
-	void setFlipY(bool flipY) override;
+	void SetFlipX(bool flipX) override;
+	void SetFlipY(bool flipY) override;
 
-	void init() override;
-	void release() override;
+	void Init() override;
+	void Release() override;
 
-	void reset() override;
+	void Reset() override;
 
-	void update(float dt) override;
-	void draw(sf::RenderWindow& window) override;
+	void Update(float dt) override;
+	void Draw(sf::RenderWindow& window) override;
+	void Draw(sf::RenderTexture& texture);
 };
 

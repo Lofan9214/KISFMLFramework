@@ -112,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\SFML-2.6.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\SFML-2.6.1\include;.\Framework;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
@@ -132,7 +132,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\SFML-2.6.1\include;.\Framework;$(ProjectDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,6 +144,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BallGo.cpp" />
+    <ClCompile Include="BatGo.cpp" />
     <ClCompile Include="Framework\Framework.cpp" />
     <ClCompile Include="Framework\GameObject.cpp" />
     <ClCompile Include="Framework\InputMgr.cpp" />
@@ -158,9 +160,15 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Framework\TextGo.cpp" />
-    <ClCompile Include="Framework\Utilities.cpp" />
+    <ClCompile Include="Framework\Utils.cpp" />
+    <ClCompile Include="Framework\SoundObject.cpp" />
+    <ClCompile Include="SceneGame.cpp" />
+    <ClCompile Include="UiMessage.cpp" />
+    <ClCompile Include="UiScore.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BallGo.h" />
+    <ClInclude Include="BatGo.h" />
     <ClInclude Include="Framework\Defines.h" />
     <ClInclude Include="Framework\Framework.h" />
     <ClInclude Include="Framework\GameObject.h" />
@@ -175,7 +183,11 @@
     <ClInclude Include="Framework\SpriteGo.h" />
     <ClInclude Include="Framework\stdafx.h" />
     <ClInclude Include="Framework\TextGo.h" />
-    <ClInclude Include="Framework\Utilities.h" />
+    <ClInclude Include="Framework\Utils.h" />
+    <ClInclude Include="Framework\SoundObject.h" />
+    <ClInclude Include="SceneGame.h" />
+    <ClInclude Include="UiMessage.h" />
+    <ClInclude Include="UiScore.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

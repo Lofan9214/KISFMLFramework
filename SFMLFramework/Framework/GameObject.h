@@ -5,64 +5,74 @@ protected:
 	std::string name;
 	bool active = true;
 	sf::Vector2f position;
-	Origins originpreset;
+	Origins originPreset;
 	sf::Vector2f origin;
 	sf::Vector2f scale;
 
 	bool bFlipX = false;
 	bool bFlipY = false;
 
-	//복사생성자, 대입연산자 막기
-public:
-	SortingLayers sortinglayer = SortingLayers::Default;
+	SortingLayers sortingLayer = SortingLayers::Default;
 	int sortingOrder = 0;
+	int targetView = 0;
 
+	GameObject(const GameObject&) = delete;
+	GameObject& operator=(const GameObject&) = delete;
+
+public:
 	GameObject(const std::string& name = "");
 	virtual ~GameObject() = default;
 
-	const std::string& getName() { return name; }
-	void setName(const std::string& iname) { name = iname; }
+	const std::string& GetName() { return name; }
+	void SetName(const std::string& iname) { name = iname; }
 
-	bool isActive() const { return active; }
-	void setActive(bool bActive) { active = bActive; }
+	bool IsActive() const { return active; }
+	void SetActive(bool bActive) { active = bActive; }
 
-	sf::Vector2f getPosition() const { return position; }
-	virtual void setPosition(const sf::Vector2f& pos) { position = pos; }
+	sf::Vector2f GetPosition() const { return position; }
+	virtual void SetPosition(const sf::Vector2f& pos) { position = pos; }
 
-	sf::Vector2f getOrigin() const { return origin; }
-	virtual void setOrigin(Origins preset);
-	virtual void setOrigin(const sf::Vector2f& neworigin)
+	sf::Vector2f GetOrigin() const { return origin; }
+	virtual void SetOrigin(Origins preset);
+	virtual void SetOrigin(const sf::Vector2f& neworigin)
 	{
 		origin = neworigin;
-		originpreset = Origins::Custom;
+		originPreset = Origins::Custom;
 	}
 
-	sf::Vector2f getScale() const { return scale; }
-	virtual void setScale(const sf::Vector2f& iscale) { scale = iscale; }
+	sf::Vector2f GetScale() const { return scale; }
+	virtual void SetScale(const sf::Vector2f& iscale) { scale = iscale; }
 
-	virtual bool getFlipX() const { return bFlipX; }
-	virtual void setFlipX(bool flipx);
-	virtual bool getFlipY() const { return bFlipY; }
-	virtual void setFlipY(bool flipy);
+	virtual bool GetFlipX() const { return bFlipX; }
+	virtual void SetFlipX(bool flipx);
+	virtual bool GetFlipY() const { return bFlipY; }
+	virtual void SetFlipY(bool flipy);
 
-	virtual void init();
-	virtual void release();
+	virtual void Init();
+	virtual void Release();
 
-	virtual void reset();
+	virtual void Reset();
 
-	virtual void update(float dt);
-	virtual void draw(sf::RenderWindow& window);
+	virtual void Update(float dt);
+	virtual void Draw(sf::RenderWindow& window);
 
+	void SetSortingLayer(SortingLayers sortingLayer) { this->sortingLayer = sortingLayer; }
+	SortingLayers GetSortingLayer() { return sortingLayer; }
+
+	void SetSortingOrder(int sortingOrder) { this->sortingOrder = sortingOrder; }
+	int GetSortingOrder() { return this->sortingOrder; }
 };
 
 struct DrawOrderComparer
 {
 	bool operator()(GameObject* a, GameObject* b) const
 	{
-		if (a->sortinglayer != b->sortinglayer)
+		SortingLayers sLA = a->GetSortingLayer();
+		SortingLayers sLB = b->GetSortingLayer();
+		if (sLA != sLB)
 		{
-			return a->sortinglayer > b->sortinglayer;
+			return sLA > sLB;
 		}
-		return a->sortingOrder > b->sortingOrder;
+		return a->GetSortingOrder() > b->GetSortingOrder();
 	}
 };

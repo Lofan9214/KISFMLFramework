@@ -7,7 +7,7 @@ class SceneMgr : public Singleton<SceneMgr>
 protected:
 	std::vector<Scene*> scenes;
 
-	SceneIds startScene = SceneIds::Dev1;
+	SceneIds startScene = SceneIds::Game;
 	SceneIds currentScene;
 	SceneIds nextScene = SceneIds::None;
 
@@ -21,17 +21,17 @@ protected:
 	SceneMgr(const SceneMgr&) = delete;
 	SceneMgr& operator=(const SceneMgr&) = delete;
 public:
-	void init();
-	void release();
+	void Init();
+	void Release();
 
-	Scene* getCurrentScene() { return scenes[(int)currentScene]; }
-	SceneIds getCurrentSceneId() const { return currentScene; }
-	void changeScene(SceneIds id);
+	Scene* GetCurrentScene() { return scenes[(int)currentScene]; }
+	SceneIds GetCurrentSceneId() const { return currentScene; }
+	void ChangeScene(SceneIds id);
 
-	void update(float deltatime);
-	void lateUpdate(float deltatime);
+	void Update(float deltatime);
+	void LateUpdate(float deltatime);
 
-	void draw(sf::RenderWindow& window);
+	void Draw(sf::RenderWindow& window);
 };
 
 #define SCENE_MGR (SceneMgr::Instance())

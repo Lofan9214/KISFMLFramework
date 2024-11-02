@@ -90,7 +90,7 @@ void InputMgr::Update(float dt)
 
 		axisInfo.value += dir * axisInfo.sensi * dt;
 
-		axisInfo.value = Utilities::Clamp(axisInfo.value, -1.f, 1.f);
+		axisInfo.value = Utils::Clamp(axisInfo.value, -1.f, 1.f);
 		float axisTH = abs(dir * axisInfo.sensi * dt);
 
 		if (raw == 0.f && abs(axisInfo.value) < axisTH)

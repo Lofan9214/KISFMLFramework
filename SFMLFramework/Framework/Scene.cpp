@@ -6,102 +6,110 @@ Scene::Scene(SceneIds id)
 {
 }
 
-void Scene::init()
+void Scene::Init()
 {
-	onPreDraw();
+	drawObjects.push_back(std::list<GameObject*>());
+
+	OnPreDraw();
 	for (auto obj : gameObjects)
 	{
-		obj->init();
+		obj->Init();
 	}
 }
 
-void Scene::release()
+void Scene::Release()
 {
 	for (auto obj : gameObjects)
 	{
-		obj->release();
+		obj->Release();
 		delete obj;
 	}
 	gameObjects.clear();
 }
 
-void Scene::enter()
+void Scene::Enter()
 {
 	for (auto obj : addGameObjs)
 	{
-		obj->reset();
+		obj->Reset();
 	}
 	for (auto obj : gameObjects)
 	{
-		obj->reset();
+		obj->Reset();
 	}
 }
 
-void Scene::exit()
+void Scene::Exit()
 {
-	applyAddGo();
-	applyRemoveGo();
+	ApplyAddGo();
+	ApplyRemoveGo();
 }
 
-void Scene::update(float dt)
+void Scene::Update(float dt)
 {
 	for (auto obj : gameObjects)
 	{
-		if (!obj->isActive())
+		if (!obj->IsActive())
 		{
 			continue;
 		}
-		obj->update(dt);
+		obj->Update(dt);
 	}
 }
 
-void Scene::lateUpdate(float dt)
+void Scene::LateUpdate(float dt)
 {
 }
 
-void Scene::onPreDraw()
+void Scene::OnPreDraw()
 {
-	applyAddGo();
-	applyRemoveGo();
+	ApplyAddGo();
+	ApplyRemoveGo();
 }
 
-void Scene::draw(sf::RenderWindow& window)
+void Scene::Draw(sf::RenderWindow& window)
 {
-	std::priority_queue<GameObject*, std::vector<GameObject*>, DrawOrderComparer> drawqueue;
+	//std::priority_queue<GameObject*, std::vector<GameObject*>, DrawOrderComparer> drawqueue;
 
-	for (auto obj : gameObjects)
+	for (auto& lstDrawObject : drawObjects)
 	{
-		if (!obj->isActive())
+		for (auto obj : lstDrawObject)
 		{
-			continue;
+			if (!obj->IsActive())
+			{
+				continue;
+			}
+			obj->Draw(window);
+			//drawqueue.push(obj);
 		}
-		drawqueue.push(obj);
 	}
 
-	while (!drawqueue.empty())
-	{
-		GameObject* obj = drawqueue.top();
-		obj->draw(window);
-		drawqueue.pop();
-	}
+	//while (!drawqueue.empty())
+	//{
+	//	GameObject* obj = drawqueue.top();
+	//	obj->draw(window);
+	//	drawqueue.pop();
+	//}
 }
 
-void Scene::onPostDraw()
+void Scene::OnPostDraw()
 {
-	applyAddGo();
-	applyRemoveGo();
+	ApplyAddGo();
+	ApplyRemoveGo();
+	SortDrawObject();
 }
 
-void Scene::removeGo(GameObject* obj)
+void Scene::RemoveGo(GameObject* obj)
 {
+	gameObjectsChanged = true;
 	removeGameObjs.push_back(obj);
 }
 
-GameObject* Scene::findGo(const std::string& name)
+GameObject* Scene::FindGo(const std::string& name)
 {
 	for (auto obj : gameObjects)
 	{
-		if (obj->getName() == name)
+		if (obj->GetName() == name)
 		{
 			return obj;
 		}
@@ -117,14 +125,14 @@ int Scene::FindGoAll(const std::string& name, std::list<GameObject*>& list)
 	{
 		for (auto obj : list)
 		{
-			obj->release();
+			obj->Release();
 		}
 		list.clear();
 	}
 
 	for (auto obj : gameObjects)
 	{
-		if (obj->getName() == name)
+		if (obj->GetName() == name)
 		{
 			++cnt;
 			list.push_back(obj);
@@ -135,7 +143,7 @@ int Scene::FindGoAll(const std::string& name, std::list<GameObject*>& list)
 	return cnt;
 }
 
-void Scene::applyAddGo()
+void Scene::ApplyAddGo()
 {
 	for (auto go : addGameObjs)
 	{
@@ -143,15 +151,45 @@ void Scene::applyAddGo()
 		{
 			gameObjects.push_back(go);
 		}
+		if (drawView.size() == 0)
+		{
+			drawObjects.front().push_back(go);
+		}
+		else
+		{
+			//view가 하나 이상 설정되어 있을 시 뷰에 대해 만들기
+		}
 	}
+	addGameObjs.clear();
 }
 
-void Scene::applyRemoveGo()
+void Scene::ApplyRemoveGo()
 {
-	addGameObjs.clear();
 	for (auto go : removeGameObjs)
 	{
 		gameObjects.remove(go);
+		if (drawView.size() == 0)
+		{
+			drawObjects.front().remove(go);
+		}
+		else
+		{
+			//view가 하나 이상 설정되어 있을 시 지우기 만들기
+		}
 	}
+
 	removeGameObjs.clear();
+}
+
+void Scene::SortDrawObject()
+{
+	if (gameObjectsChanged)
+	{
+		return;
+	}
+	gameObjectsChanged = false;
+	for (auto vecdrawObject : drawObjects)
+	{
+		std::stable_sort(vecdrawObject.begin(), vecdrawObject.end(), DrawOrderComparer());
+	}
 }

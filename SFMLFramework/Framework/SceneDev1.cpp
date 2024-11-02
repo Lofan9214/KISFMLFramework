@@ -8,33 +8,33 @@ SceneDev1::SceneDev1()
 {
 }
 
-void SceneDev1::init()
+void SceneDev1::Init()
 {
 
-	Scene::init();
+	Scene::Init();
 }
 
-void SceneDev1::enter()
+void SceneDev1::Enter()
 {
-	Scene::enter();
+	Scene::Enter();
 
 	setStatus(Status::Awake);
 }
 
-void SceneDev1::exit()
+void SceneDev1::Exit()
 {
 	std::cout << "SceneDev1::exit()" << std::endl;
 
-	Scene::exit();
+	Scene::Exit();
 }
 
-void SceneDev1::update(float dt)
+void SceneDev1::Update(float dt)
 {
-	Scene::update(dt);
+	Scene::Update(dt);
 
 	if (InputMgr::GetKeyDown(sf::Keyboard::Space))
 	{
-		SCENE_MGR.changeScene(SceneIds::Dev2);
+		SCENE_MGR.ChangeScene(SceneIds::Dev2);
 	}
 
 	switch (currentStatus)
@@ -54,9 +54,9 @@ void SceneDev1::update(float dt)
 	}
 }
 
-void SceneDev1::draw(sf::RenderWindow& window)
+void SceneDev1::Draw(sf::RenderWindow& window)
 {
-	Scene::draw(window);
+	Scene::Draw(window);
 }
 
 void SceneDev1::setStatus(Status newStatus)

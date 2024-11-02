@@ -8,11 +8,11 @@ protected:
 public:
     SceneDev2();
     ~SceneDev2() = default;
-    void init() override;
-    void enter() override;
-    void exit() override;
+    void Init() override;
+    void Enter() override;
+    void Exit() override;
 
-    void update(float dt) override;
-    void draw(sf::RenderWindow& window) override;
+    void Update(float dt) override;
+    void Draw(sf::RenderWindow& window) override;
 };
 

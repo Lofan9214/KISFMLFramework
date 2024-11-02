@@ -1,25 +1,25 @@
 #include "stdafx.h"
-#include "Utilities.h"
+#include "Utils.h"
 
-std::mt19937 Utilities::generator;
-const float Utilities::PI = acosf(-1);
+std::mt19937 Utils::generator;
+const float Utils::PI = acosf(-1);
 
-sf::Vector2f Utilities::SetOrigin(sf::Sprite& obj, Origins preset)
+sf::Vector2f Utils::SetOrigin(sf::Sprite& obj, Origins preset)
 {
 	return SetOrigin(obj, preset, obj.getLocalBounds());
 }
 
-sf::Vector2f Utilities::SetOrigin(sf::Text& obj, Origins preset)
+sf::Vector2f Utils::SetOrigin(sf::Text& obj, Origins preset)
 {
 	return SetOrigin(obj, preset, obj.getLocalBounds());
 }
 
-sf::Vector2f Utilities::SetOrigin(sf::Shape& obj, Origins preset)
+sf::Vector2f Utils::SetOrigin(sf::Shape& obj, Origins preset)
 {
 	return SetOrigin(obj,preset, obj.getLocalBounds());
 }
 
-sf::Vector2f Utilities::SetOrigin(sf::Transformable& obj, Origins preset, const sf::FloatRect& localbound)
+sf::Vector2f Utils::SetOrigin(sf::Transformable& obj, Origins preset, const sf::FloatRect& localbound)
 {
 	sf::Vector2f newOrigin;
 
@@ -31,42 +31,42 @@ sf::Vector2f Utilities::SetOrigin(sf::Transformable& obj, Origins preset, const 
 	return newOrigin;
 }
 
-void Utilities::init()
+void Utils::Init()
 {
 	std::random_device rd;
 	generator.seed(rd());
 }
 
-float Utilities::randFloatRange(float min, float max)
+float Utils::RandomRange(float min, float max)
 {
 	std::uniform_real_distribution<> dist(min, max);
 	return dist(generator);
 }
 
-int Utilities::randIntRange(int min, int max)
+int Utils::RandomRange(int min, int max)
 {
 	std::uniform_int_distribution<> dist(min, max);
 	return dist(generator);
 }
 
-float Utilities::randPercent()
+float Utils::RandomValue()
 {
 	std::uniform_real_distribution<> dist(0.f, 1.f);
 	return dist(generator);
 }
 
-sf::Vector2f Utilities::randOnCircle()
+sf::Vector2f Utils::RandomOnUnitCircle()
 {
-	float rad = randFloatRange(0.f, PI * 2.f);
+	float rad = RandomRange(0.f, PI * 2.f);
 	return sf::Vector2f(std::cosf(rad), std::sinf(rad));
 }
 
-sf::Vector2f Utilities::randInCircle()
+sf::Vector2f Utils::RandomInUnitCircle()
 {
-	return randOnCircle() * randPercent();
+	return RandomOnUnitCircle() * RandomValue();
 }
 
-float Utilities::Clamp(float value, float min, float max)
+float Utils::Clamp(float value, float min, float max)
 {
 	if (value < min)
 	{

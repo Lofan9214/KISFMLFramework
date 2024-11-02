@@ -1,17 +1,17 @@
 #include "stdafx.h"
 
 GameObject::GameObject(const std::string& name)
-	:name(name), originpreset(Origins::TL), origin(0.f, 0.f), scale(1.f, 1.f)
+	:name(name), originPreset(Origins::TL), origin(0.f, 0.f), scale(1.f, 1.f)
 {
 }
 
-void GameObject::setOrigin(Origins preset)
+void GameObject::SetOrigin(Origins preset)
 {
-	originpreset = preset;
+	originPreset = preset;
 	origin = { 0.f, 0.f };
 }
 
-void GameObject::setFlipX(bool flipx)
+void GameObject::SetFlipX(bool flipx)
 {
 	bFlipX = flipx;
 	if ((bFlipX && scale.x > 0)
@@ -21,7 +21,7 @@ void GameObject::setFlipX(bool flipx)
 	}
 }
 
-void GameObject::setFlipY(bool flipy)
+void GameObject::SetFlipY(bool flipy)
 {
 	bFlipY = flipy;
 	if ((bFlipY && scale.y > 0)
@@ -31,22 +31,22 @@ void GameObject::setFlipY(bool flipy)
 	}
 }
 
-void GameObject::init()
+void GameObject::Init()
 {
 }
 
-void GameObject::release()
+void GameObject::Release()
 {
 }
 
-void GameObject::reset()
+void GameObject::Reset()
 {
 }
 
-void GameObject::update(float dt)
+void GameObject::Update(float dt)
 {
 }
 
-void GameObject::draw(sf::RenderWindow& window)
+void GameObject::Draw(sf::RenderWindow& window)
 {
 }

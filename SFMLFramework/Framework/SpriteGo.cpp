@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "SpriteGo.h"
 
-void SpriteGo::reset()
+void SpriteGo::Reset()
 {
 	sprite.setTexture(ResourceMgr<sf::Texture>::Instance().Get(textureId));
 	sprite.setScale(scale);
-	setOrigin(originpreset);
+	SetOrigin(originPreset);
 }
 
 SpriteGo::SpriteGo(const std::string& texId, const std::string& name)
@@ -13,56 +13,61 @@ SpriteGo::SpriteGo(const std::string& texId, const std::string& name)
 {
 }
 
-void SpriteGo::setOrigin(Origins preset)
+void SpriteGo::SetOrigin(Origins preset)
 {
 	if (preset < Origins::Custom)
 	{
-		originpreset = preset;
-		origin = Utilities::SetOrigin(sprite, preset);
+		originPreset = preset;
+		origin = Utils::SetOrigin(sprite, preset);
 	}
 }
 
-void SpriteGo::setOrigin(const sf::Vector2f& neworigin)
+void SpriteGo::SetOrigin(const sf::Vector2f& neworigin)
 {
-	originpreset = Origins::Custom;
+	originPreset = Origins::Custom;
 	sprite.setOrigin(neworigin);
 }
 
-void SpriteGo::setFlipX(bool flipX)
+void SpriteGo::SetFlipX(bool flipX)
 {
-	GameObject::setFlipX(flipX);
+	GameObject::SetFlipX(flipX);
 	sprite.setScale(scale);
 }
 
-void SpriteGo::setFlipY(bool flipY)
+void SpriteGo::SetFlipY(bool flipY)
 {
-	GameObject::setFlipY(flipY);
+	GameObject::SetFlipY(flipY);
 	sprite.setScale(scale);
 }
 
-void SpriteGo::setPosition(const sf::Vector2f& pos)
+void SpriteGo::SetPosition(const sf::Vector2f& pos)
 {
-	GameObject::setPosition(pos);
+	GameObject::SetPosition(pos);
 	sprite.setPosition(pos);
 }
 
-void SpriteGo::init()
+void SpriteGo::Init()
 {
 }
 
-void SpriteGo::release()
+void SpriteGo::Release()
 {
 }
 
-void SpriteGo::update(float dt)
+void SpriteGo::Update(float dt)
 {
 	sprite.setPosition(position);
 
-	GameObject::update(dt);
+	GameObject::Update(dt);
 }
 
-void SpriteGo::draw(sf::RenderWindow& window)
+void SpriteGo::Draw(sf::RenderWindow& window)
 {
-	GameObject::draw(window);
+	GameObject::Draw(window);
 	window.draw(sprite);
+}
+
+void SpriteGo::Draw(sf::RenderTexture& texture)
+{
+	texture.draw(sprite);
 }

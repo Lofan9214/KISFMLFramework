@@ -4,9 +4,9 @@ void Framework::Init(int width, int height, const std::string& name)
 {
 	window.create(sf::VideoMode(width, height), name);
 
-	Utilities::init();
-
-	SCENE_MGR.init();
+	Utils::Init();
+	InputMgr::Init();
+	SCENE_MGR.Init();
 }
 
 void Framework::Do()
@@ -32,14 +32,15 @@ void Framework::Do()
 #pragma endregion 이벤트 루프
 
 #pragma region 업데이트
-		SCENE_MGR.update(deltaTime);
-		SCENE_MGR.lateUpdate(deltaTime);
+		InputMgr::Update(deltaTime);
+		SCENE_MGR.Update(deltaTime);
+		SCENE_MGR.LateUpdate(deltaTime);
 
 #pragma endregion 업데이트
 
 #pragma region 드로우
 		window.clear();
-		SCENE_MGR.draw(window);
+		SCENE_MGR.Draw(window);
 		window.display();
 #pragma endregion 드로우
 	}
@@ -47,6 +48,6 @@ void Framework::Do()
 
 void Framework::Release()
 {
-	SCENE_MGR.release();
+	SCENE_MGR.Release();
 
 }
