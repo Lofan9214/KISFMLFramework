@@ -19,6 +19,12 @@ protected:
 	SpriteGo* bg;
 	sf::CircleShape minimap;
 
+	int dr = 0;
+	int dg = 0;
+	int db = 0;
+
+	sf::Uint8 r = 255, g = 0, b = 0;
+
 	bool isBallFired = false;
 
 public:

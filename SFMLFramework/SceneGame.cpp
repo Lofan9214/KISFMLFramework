@@ -87,6 +87,44 @@ void SceneGame::Update(float dt)
 	{
 		SCENE_MGR.ChangeScene(SCENE_MGR.GetCurrentSceneId());
 	}
+
+
+	r += dr;
+	g += dg;
+	b += db;
+
+	if (r == 255 && g == 0 && b == 0)
+	{
+		dr = 0; dg = 1; db = 0;
+	}
+
+	if (r == 255 && g == 255 && b == 0)
+	{
+		dr = -1; dg = 0; db = 0;
+	}
+
+	if (r == 0 && g == 255 && b == 0)
+	{
+		dr = 0; dg = 0; db = 1;
+	}
+
+	if (r == 0 && g == 255 && b == 255)
+	{
+		dr = 0; dg = -1; db = 0;
+	}
+
+	if (r == 0 && g == 0 && b == 255)
+	{
+		dr = 1; dg = 0; db = 0;
+	}
+
+	if (r == 255 && g == 0 && b == 255)
+	{
+		dr = 0; dg = 0; db = -1;
+	}
+
+	uiScore->SetFillColor(sf::Color(r, g, b));
+
 }
 
 void SceneGame::Draw(sf::RenderWindow& window)
