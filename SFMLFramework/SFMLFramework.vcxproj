@@ -162,9 +162,11 @@
     <ClCompile Include="Framework\TextGo.cpp" />
     <ClCompile Include="Framework\Utils.cpp" />
     <ClCompile Include="Framework\SoundObject.cpp" />
+    <ClCompile Include="Framework\RoundView.cpp" />
     <ClCompile Include="SceneGame.cpp" />
     <ClCompile Include="UiMessage.cpp" />
     <ClCompile Include="UiScore.cpp" />
+    <ClCompile Include="ViewScope.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BallGo.h" />
@@ -185,9 +187,11 @@
     <ClInclude Include="Framework\TextGo.h" />
     <ClInclude Include="Framework\Utils.h" />
     <ClInclude Include="Framework\SoundObject.h" />
+    <ClInclude Include="Framework\RoundView.h" />
     <ClInclude Include="SceneGame.h" />
     <ClInclude Include="UiMessage.h" />
     <ClInclude Include="UiScore.h" />
+    <ClInclude Include="ViewScope.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

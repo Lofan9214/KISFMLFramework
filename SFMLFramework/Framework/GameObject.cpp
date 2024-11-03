@@ -50,3 +50,7 @@ void GameObject::Update(float dt)
 void GameObject::Draw(sf::RenderWindow& window)
 {
 }
+
+void GameObject::Draw(sf::RenderTexture& window)
+{
+}

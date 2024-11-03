@@ -14,6 +14,7 @@ SceneGame::SceneGame()
 void SceneGame::Init()
 {
 	bg = AddGo(new SpriteGo("bg.jpg", "name"));
+	//bg->SetActive(false);
 	ball = AddGo(new BallGo("Ball"));
 	ball2 = AddGo(new BallGo("Ball"));
 	bat = AddGo(new BatGo("Bat"));
@@ -93,24 +94,24 @@ void SceneGame::Draw(sf::RenderWindow& window)
 	Scene::Draw(window);
 
 	sf::RenderTexture rt;
-	rt.create(120, 120);
+	rt.create(240, 240);
 	rt.clear({ 0,0,0,0 });
-	sf::View testview({ 0,0,120,120 });
+	sf::View testview({ 0,0,240,240 });
 	//testview.setViewport({ 0.75,0.1,0.2,0.2 });
-	testview.zoom(0.5f);
+	testview.zoom(0.5f/6.f);
 	testview.setCenter({ minimap.getPosition().x+50.f,minimap.getPosition().y+50.f });
 
 	rt.setView(testview);
 
 	sf::Vector2f posminimap = { InputMgr::GetMousePositionf().x - minimap.getPosition().x - 50.f,InputMgr::GetMousePositionf().y - minimap.getPosition().y-50.f };
+	float a = 50.f;
 
-	posminimap *= FRAMEWORK.GetDeltaTime()*5.f;
-	float a = 0.05f;
 	sf::Vector2f LemniscatePos = { a * cosf(FRAMEWORK.GetTime()) / (1 + sinf(FRAMEWORK.GetTime()) * sinf(FRAMEWORK.GetTime())),a * sinf(FRAMEWORK.GetTime()) * cosf(FRAMEWORK.GetTime()) / (1 + sinf(FRAMEWORK.GetTime()) * sinf(FRAMEWORK.GetTime())) };
+	posminimap += LemniscatePos;
+	posminimap *= FRAMEWORK.GetDeltaTime()*5.f;
 	posminimap += minimap.getPosition();
 	bg->Draw(rt);
 	rt.display();
-	posminimap += LemniscatePos;
 	minimap.setPosition(posminimap);
 	minimap.setTexture(&rt.getTexture());
 	window.draw(minimap);

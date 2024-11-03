@@ -55,6 +55,7 @@ public:
 
 	virtual void Update(float dt);
 	virtual void Draw(sf::RenderWindow& window);
+	virtual void Draw(sf::RenderTexture& window);
 
 	void SetSortingLayer(SortingLayers sortingLayer) { this->sortingLayer = sortingLayer; }
 	SortingLayers GetSortingLayer() { return sortingLayer; }
